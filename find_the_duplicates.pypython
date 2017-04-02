@@ -1,0 +1,17 @@
+#!/bin/env python
+import hashlib, os
+from collections import defaultdict
+
+d = defaultdict(list)
+
+for file in os.listdir("/home/bharati/python_code"):
+    if file.endswith(".dat"):
+        chk = (hashlib.md5(open(file,'rb').read()).digest())
+        print 'variable', chk
+        if chk in d:
+            print "match", chk, d.keys()
+            d[chk].append(file)
+        else:
+            d.update({chk:file})
+
+print dict(d)
